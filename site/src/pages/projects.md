@@ -3,8 +3,8 @@ layout: projects.njk
 title: Projects
 date: 2021-01-01
 permalink: /projects/index.html
-metaDescription: A sample Projects page
-subtitle: This is the page where all projects will live
+metaDescription: Projects page
+subtitle: A collection of projects headed or contributed to.
 emoji: 💻
 eleventyNavigation:
   key: Projects
