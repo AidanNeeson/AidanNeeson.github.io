@@ -14,10 +14,19 @@ eleventyNavigation:
 **Bachelor of Science in Computer Science** *(2020 - 2024)*
 **Minors: Energy and Society; Mathematics**
 
+* GPA: 3.75/4.0
+
+*Relevant Coursework:*
+
+* Software Engineering
+* Computer Organization
+* Web Development
+* Discrete Structures
+
+*Acedemic Achievements:*
+
 * Dean's list first and second year
 
 - - -
 
-### 👩‍💻 Experience:
-
-:(
+Resume (Markdown version): <a href="resume.md" download>Click to Download</a>
