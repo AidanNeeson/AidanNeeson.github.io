@@ -11,4 +11,7 @@ eleventyNavigation:
   order: 5
 ---
 
-"contact information and relevant social media links"
+#### Want to get in contact or learn more about me?
+
+Email me at: neeson01@allegheny.edu
+View my code on [GitHub](https://github.com/AidanNeeson).
