@@ -12,4 +12,4 @@ eleventyNavigation:
 
 "my full biography"
 
-![Fern in Hand](/assets/img/fern-in-hand.jpeg "Fern in Hand")
+![Self Portrait](/assets/img/professional-portrait.jpeg "Self Portrait")
