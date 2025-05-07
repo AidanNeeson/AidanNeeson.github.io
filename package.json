@@ -1,0 +1,27 @@
+{
+  "name": "personal-portfolio",
+  "version": "1.0.0",
+  "description": "Personal Portfolio Website",
+  "main": "site/index.html",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AidanNeeson/AidanNeeson.github.io.git"
+  },
+  "author": "Aidan Neeson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AidanNeeson/AidanNeeson.github.io/issues"
+  },
+  "homepage": "https://github.com/AidanNeeson/AidanNeeson.github.io#readme",
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "three": "^0.176.0",
+    "tweakpane": "^4.0.5"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

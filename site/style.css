@@ -1,0 +1,37 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+#top-spacer {
+    background: black;
+    border-bottom: 1px solid rgb(167, 167, 167);
+    position: fixed;
+    left: 1.5%;
+    width: 97.1%;
+    height: 3.8%;
+    z-index: 10;
+}
+
+#three-container {
+    border-bottom: 1px solid rgb(167, 167, 167);
+    border-left: 1px solid rgb(167, 167, 167);
+    border-right: 1px solid rgb(167, 167, 167);
+    position: fixed;
+    top: 2%;
+    left: 1.5%;
+    width: 97%;
+    height: 94%;
+    z-index: 0;
+    pointer-events: none; /* so mouse events pass through to content if needed */
+}
+
+#content {
+    position: relative;
+    z-index: 10;
+    color: #fff;
+    padding: 2rem;
+}
+
