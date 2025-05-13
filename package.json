@@ -2,9 +2,9 @@
   "name": "personal-portfolio",
   "version": "1.0.0",
   "description": "Personal Portfolio Website",
-  "main": "site/index.html",
+  "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -16,12 +16,8 @@
     "url": "https://github.com/AidanNeeson/AidanNeeson.github.io/issues"
   },
   "homepage": "https://github.com/AidanNeeson/AidanNeeson.github.io#readme",
-  "dependencies": {
-    "gsap": "^3.13.0",
-    "three": "^0.176.0",
-    "tweakpane": "^4.0.5"
-  },
   "devDependencies": {
+    "serve": "^14.2.4",
     "vite": "^6.3.5"
   }
 }
