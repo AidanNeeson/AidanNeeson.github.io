@@ -68,6 +68,16 @@ li {
     align-self: flex-end;
 }
 
+#home-page-text {
+    color: white;
+    width: 50%;
+    justify-self: right;
+    font-size: 1vw;
+    margin: 0;
+    padding: 1em 0 1em 1em;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 #nav > * {
     background: rgba(0, 0, 0, 0.7);
 }
