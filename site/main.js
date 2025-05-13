@@ -80,7 +80,7 @@ function emitParticles() {
 }
 
 // Animate existing particles
-function animateSmoke() {
+function animateSnow() {
   const pos = geometry.attributes.position.array;
   for (let i = 0; i < particleCount; i++) {
     if (active[i]) {
@@ -132,7 +132,7 @@ const PixelShader = {
     `
   };
 
-  // Create composer
+// Create composer
 const composer = new EffectComposer(renderer);
 
 // Add render pass
@@ -144,21 +144,31 @@ const pixelPass = new ShaderPass(PixelShader);
 pixelPass.uniforms.pixelSize.value = 8.0;
 composer.addPass(pixelPass);
 
+// Start animation
 function animate() {
     requestAnimationFrame(animate);
-    animateSmoke();
+    animateSnow();
     composer.render();
   }
-  
 animate();
 
-let homeContent;
+// Redirect on refresh
+window.onbeforeunload = function() { 
+    window.setTimeout(function () { 
+        window.location = 'index.html';
+    }, 0); 
+    window.onbeforeunload = null;
+}
 
+// Initialize homepage content
+let homeContent;
 window.addEventListener('load', () => {
   homeContent = document.getElementById('page-content').innerHTML;
   handleRoute(location.pathname);
 })
 
+
+// Add click listeners on links to override for dynamic updates
 document.querySelectorAll('a[data-page]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
@@ -166,16 +176,18 @@ document.querySelectorAll('a[data-page]').forEach(link => {
 
     if (page === 'home') {
       history.pushState({page: 'home'}, '', '/');
+      updateActivePage(page);
       renderPage('home');
     } else {
       history.pushState({page}, "", `/${page}`);
+      updateActivePage(page);
       renderPage(page);
     }
   });
 });
 
+// Dynamically update page content
 function renderPage(page) {
-  console.log(page)
   if (page === 'home') {
     document.getElementById('page-content').innerHTML = homeContent;
   } else {
@@ -193,11 +205,39 @@ function renderPage(page) {
   }
 }
 
+// Handle step retracing
 window.addEventListener('popstate', () => {
   handleRoute(location.pathname);
 })
 
+// Track current page content being displayed
+function updateActivePage(page) {
+  const activeLink = document.querySelector('.active')
+  if (activeLink !== null) {
+    activeLink.classList.remove('active');
+    activeLink.textContent = activeLink.id.match(/^[^-]+/)[0];
+    activeLink.textContent = toTitleCase(activeLink.textContent);
+  }
+
+  const newActiveLink = document.querySelector(`#${page}-link`);
+  if (newActiveLink) {
+    newActiveLink.classList.add('active');
+    newActiveLink.textContent = '\u2744'
+  }
+
+}
+
+// Handing routing for step retracing, etc...
 function handleRoute(path) {
-  const page = path === '/' ? 'home' : path.replace(/^\/+/, '');
-  renderPage(page)
+    const page = path === '/' || path === '' ? 'home' : path.replace(/^\/+/, '');
+    updateActivePage(page);
+    renderPage(page);
+}
+
+// Turn text to title case
+function toTitleCase(str) {
+  return str.replace(
+    /\w\S*/g,
+    text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+  );
 }

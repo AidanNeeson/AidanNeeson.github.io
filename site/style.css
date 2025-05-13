@@ -20,12 +20,16 @@ ul {
     font-size: 1vw;
     list-style-type: none;
     padding: 1em 0 0 0;
-    margin: 0;
+    margin: 0;;
 }
 
 li {
-    color: rgb(255, 255, 255);
     padding: .5vw 0 .5vw 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
 
 #top-spacer {
@@ -48,7 +52,7 @@ li {
     width: 97vw;
     height: 94vh;
     z-index: 0;
-    pointer-events: none; /* so mouse events pass through to content if needed */
+    pointer-events: none;
 }
 
 #site-content {
@@ -89,4 +93,3 @@ li {
 #nav > ul {
     width: 17%;
 }
-
