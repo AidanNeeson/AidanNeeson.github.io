@@ -151,3 +151,53 @@ function animate() {
   }
   
 animate();
+
+let homeContent;
+
+window.addEventListener('load', () => {
+  homeContent = document.getElementById('page-content').innerHTML;
+  handleRoute(location.pathname);
+})
+
+document.querySelectorAll('a[data-page]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const page = e.target.getAttribute('data-page');
+
+    if (page === 'home') {
+      history.pushState({page: 'home'}, '', '/');
+      renderPage('home');
+    } else {
+      history.pushState({page}, "", `/${page}`);
+      renderPage(page);
+    }
+  });
+});
+
+function renderPage(page) {
+  console.log(page)
+  if (page === 'home') {
+    document.getElementById('page-content').innerHTML = homeContent;
+  } else {
+    fetch(`pages/${page}.html`)
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      return response.text();
+    })
+    .then(html => {
+      document.getElementById('page-content').innerHTML = html;
+    })
+    .catch(() => {
+      document.getElementById('page-content').innerHTML = "<p>Page not found.<p>";
+    });
+  }
+}
+
+window.addEventListener('popstate', () => {
+  handleRoute(location.pathname);
+})
+
+function handleRoute(path) {
+  const page = path === '/' ? 'home' : path.replace(/^\/+/, '');
+  renderPage(page)
+}
