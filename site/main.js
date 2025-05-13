@@ -65,7 +65,6 @@ function emitParticles() {
   for (let i = 0; i < particleCount; i++) {
 
     if (!active[i]) {
-      console.log('emitting particle at index', i);
       positions[i * 3 + 0] = originX + (Math.random() - 0.5) * 20;
       positions[i * 3 + 1] = originY;
       positions[i * 3 + 2] = originZ + (Math.random() - 0.5) * 0.2;

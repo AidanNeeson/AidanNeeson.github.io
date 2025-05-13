@@ -3,15 +3,38 @@ body, html {
     padding: 0;
     overflow: hidden;
     background-color: black;
+    font-family: 'Author', sans-serif;
+}
+
+h1 {
+    font-size: 4vw;
+    margin: 0;
+}
+
+h3 {
+    font-size: 1.25vw;
+    margin: 0;
+}
+
+ul {
+    font-size: 1vw;
+    list-style-type: none;
+    padding: 1em 0 0 0;
+    margin: 0;
+}
+
+li {
+    color: rgb(255, 255, 255);
+    padding: .5vw 0 .5vw 0;
 }
 
 #top-spacer {
     background: black;
     border-bottom: 1px solid rgb(167, 167, 167);
     position: fixed;
-    left: 1.5%;
-    width: 97.1%;
-    height: 3.8%;
+    left: 1.5vw;
+    width: 97.1vw;
+    height: 3.8vh;
     z-index: 10;
 }
 
@@ -20,18 +43,40 @@ body, html {
     border-left: 1px solid rgb(167, 167, 167);
     border-right: 1px solid rgb(167, 167, 167);
     position: fixed;
-    top: 2%;
-    left: 1.5%;
-    width: 97%;
-    height: 94%;
+    top: 2vh;
+    left: 1.5vw;
+    width: 97vw;
+    height: 94vh;
     z-index: 0;
     pointer-events: none; /* so mouse events pass through to content if needed */
 }
 
-#content {
-    position: relative;
+#site-content {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
     z-index: 10;
-    color: #fff;
-    padding: 2rem;
+    color: rgb(200, 200, 200);
+    top: 3.8vh;
+    left: 1.5vw;
+    width: 93vw;
+    height: 88.1vh;
+    padding: 1vw 2vw 1vw 2vw;
+}
+
+#page-text {
+    align-self: flex-end;
+}
+
+#nav > * {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#nav > h3 {
+    width: 50%;
+}
+
+#nav > ul {
+    width: 17%;
 }
 
