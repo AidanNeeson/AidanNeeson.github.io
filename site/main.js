@@ -188,21 +188,32 @@ document.querySelectorAll('a[data-page]').forEach(link => {
 
 // Dynamically update page content
 function renderPage(page) {
-  if (page === 'home') {
-    document.getElementById('page-content').innerHTML = homeContent;
-  } else {
-    fetch(`pages/${page}.html`)
-    .then(response => {
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-      return response.text();
-    })
-    .then(html => {
-      document.getElementById('page-content').innerHTML = html;
-    })
-    .catch(() => {
-      document.getElementById('page-content').innerHTML = "<p>Page not found.<p>";
-    });
-  }
+  const contentDiv = document.getElementById('page-content');
+
+  contentDiv.style.opacity = '0'
+
+  contentDiv.addEventListener('transitionend', function handleFade() {
+    contentDiv.removeEventListener('transitionend', handleFade);
+
+    if (page === 'home') {
+      contentDiv.innerHTML = homeContent;
+      contentDiv.style.opacity = '1';
+    } else {
+      fetch(`pages/${page}.html`)
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return response.text();
+      })
+      .then(html => {
+        contentDiv.innerHTML = html;
+        contentDiv.style.opacity = '1';
+      })
+      .catch(() => {
+        contentDiv.innerHTML = "<p>Page not found.<p>";
+        contentDiv.style.opacity = '1';
+      });
+    }
+  }, {once: true});
 }
 
 // Handle step retracing
@@ -215,16 +226,29 @@ function updateActivePage(page) {
   const activeLink = document.querySelector('.active')
   if (activeLink !== null) {
     activeLink.classList.remove('active');
+    activeLink.style.transition = 'none';
     activeLink.textContent = activeLink.id.match(/^[^-]+/)[0];
     activeLink.textContent = toTitleCase(activeLink.textContent);
+    activeLink.style.opacity = '0';
+
+    requestAnimationFrame(() => {
+      activeLink.style.transition = 'opacity 0.3s ease';
+      activeLink.style.opacity = '1'
+    });
   }
 
   const newActiveLink = document.querySelector(`#${page}-link`);
   if (newActiveLink) {
     newActiveLink.classList.add('active');
-    newActiveLink.textContent = '\u2744'
-  }
+    newActiveLink.style.transition = 'none';
+    newActiveLink.textContent = '\u2744';
+    newActiveLink.style.opacity = '0';
 
+    requestAnimationFrame(() => {
+      newActiveLink.style.transition = 'opacity 0.3s ease';
+      newActiveLink.style.opacity = '1';
+    });
+  }
 }
 
 // Handing routing for step retracing, etc...

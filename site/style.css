@@ -70,6 +70,8 @@ a {
 
 #page-content {
     align-self: flex-end;
+    opacity: 1;
+    transition: opacity 0.5s ease;
 }
 
 #home-page-text {
@@ -92,4 +94,16 @@ a {
 
 #nav > ul {
     width: 17%;
+}
+
+#nav a {
+    transition: opacity 0.3s ease;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 1;
 }
