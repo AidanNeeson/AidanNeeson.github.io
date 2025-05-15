@@ -6,21 +6,11 @@ body, html {
     font-family: 'Author', sans-serif;
 }
 
-h1 {
-    font-size: 4vw;
-    margin: 0;
-}
-
-h3 {
-    font-size: 1.25vw;
-    margin: 0;
-}
-
 ul {
     font-size: 1vw;
     list-style-type: none;
     padding: 1em 0 0 0;
-    margin: 0;;
+    margin: 0;
 }
 
 li {
@@ -68,42 +58,70 @@ a {
     padding: 1vw 2vw 1vw 2vw;
 }
 
-#page-content {
+#right-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
     align-self: flex-end;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    width: 50%;
+    height: 100%;
+}
+
+#nav {
+    height: 50%;
+}
+
+#home-container {
+    width: 18%;
+    text-align: right;
+}
+
+#home-page-text {
+    margin: 0;
+}
+
+#titles h1 {
+    font-size: 4vw;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#titles h3 {
+    font-size: 1.25vw;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.7);
+    width: 50%;
+}
+
+#nav ul {
+    display: flex;
+    flex-direction: column;
+    width: 17%;
+    height: 35%;
+}
+
+#nav a {
     opacity: 1;
     transition: opacity 0.5s ease;
 }
 
-#home-page-text {
+#nav li {
+    height: 33%;
+}
+
+#right-content > div {
     color: white;
-    width: 50%;
     justify-self: right;
     font-size: 1vw;
     margin: 0;
     padding: 1em 0 1em 1em;
     background-color: rgba(0, 0, 0, 0.7);
+
 }
 
 #nav > * {
     background: rgba(0, 0, 0, 0.7);
 }
 
-#nav > h3 {
-    width: 50%;
-}
-
-#nav > ul {
-    width: 17%;
-}
-
-#nav a {
-    transition: opacity 0.3s ease;
-}
-
-.fade-out {
-    opacity: 0;
-}
-
-.fade-in {
-    opacity: 1;
-}

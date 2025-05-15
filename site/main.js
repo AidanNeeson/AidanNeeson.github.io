@@ -23,6 +23,10 @@ const angle = -3 * Math.PI / 5;
 const speed = 0.005 + Math.random() * 0.005;
 let frameCount = 0;
 
+// Initialie variables to track content animation timeouts
+let pageContentTimeout = null;
+let navElementTimeout = null;
+
 // Pixel texture (1 white pixel)
 const pixelTexture = new THREE.DataTexture(
   new Uint8Array([150, 150, 150, 200]),
@@ -163,7 +167,7 @@ window.onbeforeunload = function() {
 // Initialize homepage content
 let homeContent;
 window.addEventListener('load', () => {
-  homeContent = document.getElementById('page-content').innerHTML;
+  homeContent = document.getElementById('right-content').innerHTML;
   handleRoute(location.pathname);
 })
 
@@ -176,44 +180,43 @@ document.querySelectorAll('a[data-page]').forEach(link => {
 
     if (page === 'home') {
       history.pushState({page: 'home'}, '', '/');
-      updateActivePage(page);
       renderPage('home');
+      updateActivePage(page);
     } else {
       history.pushState({page}, "", `/${page}`);
-      updateActivePage(page);
       renderPage(page);
+      updateActivePage(page);
     }
   });
 });
 
 // Dynamically update page content
 function renderPage(page) {
-  const contentDiv = document.getElementById('page-content');
+  const contentDiv = document.getElementById('right-content');
+  fadeOut(contentDiv);
 
-  contentDiv.style.opacity = '0'
+  if (pageContentTimeout) clearTimeout(pageContentTimeout);
 
-  contentDiv.addEventListener('transitionend', function handleFade() {
-    contentDiv.removeEventListener('transitionend', handleFade);
-
+  pageContentTimeout = setTimeout(() => {
     if (page === 'home') {
       contentDiv.innerHTML = homeContent;
-      contentDiv.style.opacity = '1';
+      fadeIn(contentDiv);
     } else {
       fetch(`pages/${page}.html`)
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return response.text();
-      })
-      .then(html => {
-        contentDiv.innerHTML = html;
-        contentDiv.style.opacity = '1';
-      })
-      .catch(() => {
-        contentDiv.innerHTML = "<p>Page not found.<p>";
-        contentDiv.style.opacity = '1';
-      });
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          return response.text();
+        })
+        .then(html => {
+          contentDiv.innerHTML = html;
+          fadeIn(contentDiv);
+        })
+        .catch(() => {
+          contentDiv.innerHTML = "<p>Page not found.</p>";
+          fadeIn(contentDiv);
+        });
     }
-  }, {once: true});
+  }, 300);
 }
 
 // Handle step retracing
@@ -223,31 +226,26 @@ window.addEventListener('popstate', () => {
 
 // Track current page content being displayed
 function updateActivePage(page) {
-  const activeLink = document.querySelector('.active')
-  if (activeLink !== null) {
-    activeLink.classList.remove('active');
-    activeLink.style.transition = 'none';
-    activeLink.textContent = activeLink.id.match(/^[^-]+/)[0];
-    activeLink.textContent = toTitleCase(activeLink.textContent);
-    activeLink.style.opacity = '0';
-
-    requestAnimationFrame(() => {
-      activeLink.style.transition = 'opacity 0.3s ease';
-      activeLink.style.opacity = '1'
-    });
+  if (navElementTimeout) {
+      clearTimeout(navElementTimeout);
+      navElementTimeout = null;
   }
+
+  document.querySelectorAll('#nav a').forEach(link => {
+    const baseText = link.id.match(/^[^-]+/);
+    link.textContent = toTitleCase(baseText[0]);
+    link.classList.remove('active');
+    link.style.opacity = '1';
+  });
 
   const newActiveLink = document.querySelector(`#${page}-link`);
   if (newActiveLink) {
-    newActiveLink.classList.add('active');
-    newActiveLink.style.transition = 'none';
-    newActiveLink.textContent = '\u2744';
     newActiveLink.style.opacity = '0';
-
-    requestAnimationFrame(() => {
-      newActiveLink.style.transition = 'opacity 0.3s ease';
-      newActiveLink.style.opacity = '1';
-    });
+    navElementTimeout = setTimeout(() => {
+      newActiveLink.textContent = '\u2744';
+      newActiveLink.classList.add('active');
+      fadeIn(newActiveLink);
+    }, 300);
   }
 }
 
@@ -264,4 +262,18 @@ function toTitleCase(str) {
     /\w\S*/g,
     text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
   );
+}
+
+// Handle fade-in animations
+function fadeIn(el) {
+    requestAnimationFrame(() => {
+      el.style.opacity = '1';
+    });
+}
+
+// Handle fade-out animations
+function fadeOut (el) {
+  requestAnimationFrame(() => {
+    el.style.opacity = '0';
+  });
 }
