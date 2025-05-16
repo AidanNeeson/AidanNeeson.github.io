@@ -125,12 +125,12 @@ a {
     background: rgba(0, 0, 0, 0.7);
 }
 
-.email-link {
+.link {
     position: relative;
     text-decoration: none;
 }
 
-.email-link::after {
+.link::after {
     content: '';
     position: absolute;
     left: 0;
@@ -141,7 +141,7 @@ a {
     transition: width 0.3s ease;
 }
 
-.email-link:hover::after {
+.link:hover::after {
     width: 100%;
 }
 

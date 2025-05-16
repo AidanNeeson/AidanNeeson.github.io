@@ -227,6 +227,7 @@ function updateActivePage(page) {
   document.querySelectorAll('#nav a').forEach(link => {
     const baseText = link.id.match(/^[^-]+/);
     link.textContent = toTitleCase(baseText[0]);
+    link.classList.add('link');
     link.classList.remove('active');
     link.style.opacity = '1';
   });
@@ -236,6 +237,7 @@ function updateActivePage(page) {
     newActiveLink.style.opacity = '0';
     navElementTimeout = setTimeout(() => {
       newActiveLink.textContent = '\u2744';
+      newActiveLink.classList.remove('link');
       newActiveLink.classList.add('active');
       fadeIn(newActiveLink);
     }, 300);
