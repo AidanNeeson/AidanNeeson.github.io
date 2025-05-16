@@ -156,20 +156,13 @@ function animate() {
   }
 animate();
 
-// Redirect on refresh
-window.onbeforeunload = function() { 
-    window.setTimeout(function () { 
-        window.location = 'index.html';
-    }, 0); 
-    window.onbeforeunload = null;
-}
 
 // Initialize homepage content
 let homeContent;
 window.addEventListener('load', () => {
   homeContent = document.getElementById('right-content').innerHTML;
   handleRoute(location.pathname);
-})
+});
 
 
 // Add click listeners on links to override for dynamic updates
