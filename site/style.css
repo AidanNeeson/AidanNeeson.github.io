@@ -9,7 +9,7 @@ body, html {
 ul {
     font-size: 1vw;
     list-style-type: none;
-    padding: 1em 0 0 0;
+    padding: 1em 0 0 1vw;
     margin: 0;
 }
 
@@ -52,9 +52,9 @@ a {
     color: rgb(200, 200, 200);
     top: 3.8vh;
     left: 1.5vw;
-    width: 93vw;
+    width: 94vw;
     height: 88.1vh;
-    padding: 1vw 2vw 1vw 2vw;
+    padding: 1vw 1vw 1vw 1vw;
 }
 
 #right-content {
@@ -75,21 +75,42 @@ a {
 #home-container {
     width: 18%;
     text-align: right;
+    padding: 1em 0 1em 1em;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 #home-page-text {
     margin: 0;
 }
 
+#projects-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+    overflow-y: auto;
+    position: relative;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#contact-container {
+    padding: 1em 0 1em 1em;
+    background: rgba(0, 0, 0, 0.7);
+}
+
 #titles h1 {
     font-size: 4vw;
     margin: 0;
+    padding: 0 0 0 1vw;
     background: rgba(0, 0, 0, 0.7);
 }
 
 #titles h3 {
     font-size: 1.25vw;
     margin: 0;
+    padding: 0 0 0 1vw;
     background: rgba(0, 0, 0, 0.7);
     width: 50%;
 }
@@ -116,8 +137,6 @@ a {
     justify-self: right;
     font-size: 1vw;
     margin: 0;
-    padding: 1em 0 1em 1em;
-    background-color: rgba(0, 0, 0, 0.7);
 
 }
 
@@ -125,9 +144,27 @@ a {
     background: rgba(0, 0, 0, 0.7);
 }
 
+#projects-container::-webkit-scrollbar { 
+    display: none;
+}
+
 .link {
     position: relative;
     text-decoration: none;
+}
+
+.project > * {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.project > h1 {
+    margin: 0;
+    padding: .5vw 1vw 0 1vw
+}
+
+.project > a {
+    padding: 0 1vw .5vw 1vw
 }
 
 .link::after {
