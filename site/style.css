@@ -155,11 +155,13 @@ a {
 
 .project > * {
     display: inline-block;
+    transition: opacity 0.5s ease;
     background: rgba(0, 0, 0, 0.7);
 }
 
 .project > h1 {
     margin: 0;
+    font-size: 3vw;
     padding: .5vw 1vw 0 1vw
 }
 

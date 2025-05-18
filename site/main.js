@@ -203,6 +203,7 @@ function renderPage(page) {
         .then(html => {
           contentDiv.innerHTML = html;
           fadeIn(contentDiv);
+          if (page === 'projects') setupProjectScrollOpacity();
         })
         .catch(() => {
           contentDiv.innerHTML = "<p>Page not found.</p>";
@@ -249,6 +250,52 @@ function handleRoute(path) {
     const page = path === '/' || path === '' ? 'home' : path.replace(/^\/+/, '');
     updateActivePage(page);
     renderPage(page);
+}
+
+// Track scrollable elements and adjust opacity based on location on screen
+function setupProjectScrollOpacity() {
+  const container = document.getElementById('projects-container');
+  const projects = container.querySelectorAll('.project');
+
+  function updateProjectOpacities() {
+    const containerRect = container.getBoundingClientRect();
+    const fadeZone = 100;
+
+    // Check if the container will be scrollable
+    if (container.scrollHeight > container.clientHeight) {
+      projects.forEach(project => {
+        const rect = project.getBoundingClientRect();
+        const distanceFromTop = rect.top - containerRect.top;
+        const distanceFromBottom = containerRect.bottom - rect.bottom;
+
+        let opacity = 1;
+
+        if (distanceFromTop < fadeZone) {
+          opacity = distanceFromTop / fadeZone;
+        } else if (distanceFromBottom < fadeZone) {
+          opacity = distanceFromBottom / fadeZone;
+        }
+
+        opacity = Math.max(Math.min(opacity, 1), 0.3);
+        project.style.opacity = opacity;
+      });
+
+      // Remove bottom alignment if scrolling
+      container.style.justifyContent = '';
+    } else {
+      // No scroll — make everything fully opaque and push to bottom
+      projects.forEach(project => {
+        project.style.opacity = 1;
+      });
+
+      container.style.justifyContent = 'flex-end';
+    }
+  }
+
+  container.addEventListener('scroll', updateProjectOpacities);
+  window.addEventListener('resize', updateProjectOpacities);
+
+  updateProjectOpacities();
 }
 
 // Turn text to title case
