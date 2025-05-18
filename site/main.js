@@ -277,7 +277,12 @@ function setupProjectScrollOpacity() {
         }
 
         opacity = Math.max(Math.min(opacity, 1), 0.3);
-        project.style.opacity = opacity;
+
+        if (!project.classList.contains('place-holder-project')) {
+          project.style.opacity = opacity;
+        } else {
+          project.style.opacity = '0';
+        }
       });
 
       // Remove bottom alignment if scrolling
