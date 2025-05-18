@@ -319,3 +319,15 @@ function fadeOut (el) {
     el.style.opacity = '0';
   });
 }
+
+window.addEventListener('load', () => {
+  const intro = document.getElementById('intro-screen');
+
+  // Wait for slide animations to finish + a little extra
+  setTimeout(() => {
+    intro.classList.add('hide');
+    setTimeout(() => {
+      intro.remove();
+    }, 700); // matches fade transition time
+  }, 1500); // total time before fade out
+});

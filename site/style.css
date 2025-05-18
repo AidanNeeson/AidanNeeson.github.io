@@ -184,3 +184,63 @@ a {
     width: 100%;
 }
 
+#intro-screen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+
+#intro-screen h1 {
+  font-size: 3vw;
+  font-weight: bolder;
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+}
+
+.left, .right {
+  display: inline-block;
+  opacity: 0;
+}
+
+.left {
+  transform: translateX(-500px);
+  animation: slideInLeft 0.8s ease forwards;
+  font-weight: 100;
+}
+
+.right {
+  transform: translateX(500px);
+  animation: slideInRight 0.8s ease forwards;
+  animation-delay: 0.2s;
+  font-weight: 700;
+}
+
+@keyframes slideInLeft {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* when fading out */
+#intro-screen.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
